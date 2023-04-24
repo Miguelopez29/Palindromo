@@ -1,0 +1,35 @@
+import java.text.Normalizer;
+import java.util.Scanner;
+ 
+public class FrasePalindroma {
+ 
+    public static void main(String[] args) {
+         
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Introduce una frase por teclado: ");
+        String frase = sc.nextLine();
+        sc.close();
+         
+        // normalizar la frase (quitar las tildes)
+        frase = cleanString(frase);
+         
+        // quitar los espacios en blanco
+        frase = frase.replace(" ", "");
+         
+        StringBuilder sb = new StringBuilder(frase).reverse();
+         
+        if(frase.equalsIgnoreCase(sb.toString())){
+            System.out.println("\nLa frase es palíndroma.");
+        } else {
+            System.out.println("\nLa frase no es palíndroma.");
+        }       
+ 
+    }
+     
+    public static String cleanString(String texto) {
+        texto = Normalizer.normalize(texto, Normalizer.Form.NFD);
+        texto = texto.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        return texto;
+    }
+ 
+}
